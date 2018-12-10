@@ -40,9 +40,13 @@ document.querySelector('#search-text').addEventListener('input', function(e){
     renderNotes(notes, filters)
 })
 
-document.querySelector('#for-fun').addEventListener('change', function(event){
-    console.log(event.target.checked)
-});
+document.querySelector('#filter-by').addEventListener('change', function(event){
+    console.log(event.target.value)
+})
+
+// document.querySelector('#for-fun').addEventListener('change', function(event){
+//     console.log(event.target.checked)
+// });
 
 // document.querySelector('#name-form').addEventListener('submit', function(event){
 //     event.preventDefault(); // prevent default behaviour with an updated url
