@@ -1,61 +1,11 @@
 // const ps = document.querySelectorAll('p')
-const todos = [
-    {
-        text: 'Todo 1',
-        completed: true
-    }, {
-        text: 'Todo 2',
-        completed: false
-    }, {
-        text: 'Todo 3',
-        completed: false
-    }, {
-        text: 'Todo 4',
-        completed: false
-    }
-]
+let todos = getSavedTodos()
 
 let filters = {
     searchText: ''
 }
 
-const hideCompleteTodos = function(todos){
-    document.querySelector('#todos').innerHTML = '';
 
-    const incompleteTodos = todos.filter(function (todo){
-        return !todo.completed;
-    })
-
-    incompleteTodos.forEach(function(todo){
-        const newElement = document.createElement('h5');
-        newElement.textContent = todo.text
-        document.querySelector('#incomplete-todos').appendChild(newElement);
-    });
-}
-
-
-const renderTodos = function(todos, filters){
-    const filteredTodos = todos.filter(function(todo){
-        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
-    })
-
-    const incompleteTodos = todos.filter(function (todo){
-        return !todo.completed;
-    })
-
-    document.querySelector('#todos').innerHTML = '';
-
-    
-    const newElement = document.createElement('h3');
-    newElement.textContent = `You have ${incompleteTodos.length} todos left!!`
-    document.querySelector('#todos').appendChild(newElement)
-
-    filteredTodos.forEach(function(todo){
-        const newEl = document.createElement('h5');
-        newEl.textContent = todo.text
-        document.querySelector('#todos').appendChild(newEl)
-    });
-}
 renderTodos(todos, filters)
 
 document.querySelector('#search-text').addEventListener('input', function(e){
@@ -71,8 +21,10 @@ document.querySelector('#todo-form').addEventListener('submit', function(event){
         text: event.target.elements.todoText.value,
         completed: false
     });
+    saveTodos(todos);
     renderTodos(todos, filters)
-    event.target.elements.todoText.value = '';
+    // event.target.elements.todoText.value = '';
+
 
 });
 
@@ -85,6 +37,15 @@ document.querySelector('#showIncompleteTodos').addEventListener('change', functi
         renderTodos(todos, filters)
     }
 })
+
+// const todosJSON = localStorage.getItem('todos')
+// if(todosJSON !== null){
+//     todos = JSON.parse(todosJSON)
+// }
+
+
+
+
 
 // const summary = function(todos, element){
 //     let count = 0;
